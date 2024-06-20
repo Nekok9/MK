@@ -1,0 +1,130 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP5LeEfv603wfoHzHQ+DyKh",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Nekok9/MK/blob/main/%E6%9C%80%E6%96%B0%E8%AA%B2%E9%A1%8C%EF%BC%92\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Di3RR4wd3fft",
+        "outputId": "93c35f86-9395-45b9-c0dc-ab5209eeaaef"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                Growth Rate  TFP Growth  Capital Deepening  TFP Share  \\\n",
+            "Australia          2.500000    1.800000           0.700000   0.700000   \n",
+            "Austria            2.800000    2.100000           0.700000   0.750000   \n",
+            "Belgium            2.600000    1.900000           0.700000   0.750000   \n",
+            "Canada             1.700000    1.400000           0.300000   0.700000   \n",
+            "Denmark            2.000000    1.500000           0.500000   0.650000   \n",
+            "Finland            2.500000    1.800000           0.700000   0.700000   \n",
+            "France             2.300000    1.600000           0.700000   0.700000   \n",
+            "Germany            2.600000    1.700000           0.900000   0.700000   \n",
+            "Greece             1.800000    1.200000           0.600000   0.650000   \n",
+            "Iceland            2.700000    1.900000           0.800000   0.700000   \n",
+            "Ireland            3.100000    2.000000           1.100000   0.750000   \n",
+            "Italy              2.200000    1.500000           0.700000   0.650000   \n",
+            "Japan              2.100000    1.700000           0.400000   0.600000   \n",
+            "Netherlands        2.000000    1.400000           0.600000   0.650000   \n",
+            "New Zealand        1.500000    1.000000           0.500000   0.600000   \n",
+            "Norway             2.400000    1.700000           0.600000   0.650000   \n",
+            "Portugal           2.800000    1.900000           0.900000   0.700000   \n",
+            "Spain              2.200000    1.400000           0.800000   0.650000   \n",
+            "Sweden             2.100000    1.300000           0.600000   0.600000   \n",
+            "Switzerland        1.600000    1.000000           0.600000   0.600000   \n",
+            "United Kingdom     1.800000    1.200000           0.600000   0.600000   \n",
+            "United States      2.000000    1.500000           0.700000   0.650000   \n",
+            "Average            2.240909    1.568182           0.668182   0.668182   \n",
+            "\n",
+            "                Capital Share  \n",
+            "Australia            0.300000  \n",
+            "Austria              0.250000  \n",
+            "Belgium              0.250000  \n",
+            "Canada               0.300000  \n",
+            "Denmark              0.350000  \n",
+            "Finland              0.300000  \n",
+            "France               0.300000  \n",
+            "Germany              0.300000  \n",
+            "Greece               0.350000  \n",
+            "Iceland              0.300000  \n",
+            "Ireland              0.250000  \n",
+            "Italy                0.350000  \n",
+            "Japan                0.400000  \n",
+            "Netherlands          0.350000  \n",
+            "New Zealand          0.400000  \n",
+            "Norway               0.350000  \n",
+            "Portugal             0.300000  \n",
+            "Spain                0.350000  \n",
+            "Sweden               0.400000  \n",
+            "Switzerland          0.400000  \n",
+            "United Kingdom       0.400000  \n",
+            "United States        0.350000  \n",
+            "Average              0.331818  \n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "# 抽出したデータを用いて手動で平均値を計算し、辞書に格納\n",
+        "data_dict = {\n",
+        "    \"Country\": [\"Australia\", \"Austria\", \"Belgium\", \"Canada\", \"Denmark\", \"Finland\", \"France\",\n",
+        "                \"Germany\", \"Greece\", \"Iceland\", \"Ireland\", \"Italy\", \"Japan\", \"Netherlands\",\n",
+        "                \"New Zealand\", \"Norway\", \"Portugal\", \"Spain\", \"Sweden\", \"Switzerland\",\n",
+        "                \"United Kingdom\", \"United States\"],\n",
+        "    \"Growth Rate\": [2.5, 2.8, 2.6, 1.7, 2.0, 2.5, 2.3, 2.6, 1.8, 2.7, 3.1, 2.2, 2.1, 2.0, 1.5, 2.4, 2.8, 2.2, 2.1, 1.6, 1.8, 2.0],\n",
+        "    \"TFP Growth\": [1.8, 2.1, 1.9, 1.4, 1.5, 1.8, 1.6, 1.7, 1.2, 1.9, 2.0, 1.5, 1.7, 1.4, 1.0, 1.7, 1.9, 1.4, 1.3, 1.0, 1.2, 1.5],\n",
+        "    \"Capital Deepening\": [0.7, 0.7, 0.7, 0.3, 0.5, 0.7, 0.7, 0.9, 0.6, 0.8, 1.1, 0.7, 0.4, 0.6, 0.5, 0.6, 0.9, 0.8, 0.6, 0.6, 0.6, 0.7],\n",
+        "    \"TFP Share\": [0.70, 0.75, 0.75, 0.70, 0.65, 0.70, 0.70, 0.70, 0.65, 0.70, 0.75, 0.65, 0.60, 0.65, 0.60, 0.65, 0.70, 0.65, 0.60, 0.60, 0.60, 0.65],\n",
+        "    \"Capital Share\": [0.30, 0.25, 0.25, 0.30, 0.35, 0.30, 0.30, 0.30, 0.35, 0.30, 0.25, 0.35, 0.40, 0.35, 0.40, 0.35, 0.30, 0.35, 0.40, 0.40, 0.40, 0.35]\n",
+        "}\n",
+        "\n",
+        "# データフレームに変換\n",
+        "data_df = pd.DataFrame(data_dict)\n",
+        "\n",
+        "# Country列をインデックスに設定\n",
+        "data_df.set_index(\"Country\", inplace=True)\n",
+        "\n",
+        "# 平均値の計算\n",
+        "averages = data_df.mean().to_frame().T\n",
+        "averages.index = [\"Average\"]\n",
+        "\n",
+        "# 平均値をデータフレームに追加\n",
+        "result_df = pd.concat([data_df, averages])\n",
+        "\n",
+        "# 結果の表示\n",
+        "print(result_df)\n"
+      ]
+    }
+  ]
+}
